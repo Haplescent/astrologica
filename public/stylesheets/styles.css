@@ -13,6 +13,10 @@ main {
   flex: 1 0 auto;
 }
 
+#horoscope {
+  flex: 1 0 auto;
+}
+
 nav {
   background: #171528;
   height: 10vh;
@@ -174,7 +178,7 @@ form.login {
   color: white;
 }
 .back-card .text {
-  margin-top:20px;
+  margin-top: 20px;
 }
 .card:hover {
   transform: rotateY(180deg);
