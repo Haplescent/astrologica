@@ -54,6 +54,7 @@ $(document).ready(function () {
     var apiKey = process.env.API_KEY;
     var api = `sun_sign_prediction/daily/${signLowerCase}`;
     var data = "JSON Request Data";
+
     $.ajax({
       url: "https://json.astrologyapi.com/v1/" + api,
       method: "POST",
