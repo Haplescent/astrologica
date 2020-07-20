@@ -50,22 +50,13 @@ $(document).ready(function () {
 
     // API call
 
-    var userId = process.env.API_USER_ID;
-    var apiKey = process.env.API_KEY;
-    var api = `sun_sign_prediction/daily/${signLowerCase}`;
-    var data = "JSON Request Data";
-    console.log(userId);
-    console.log(apiKey);
-
     $.ajax({
-      url: "https://json.astrologyapi.com/v1/" + api,
+      url: "/horoscope",
       method: "POST",
       dataType: "json",
-      headers: {
-        authorization: "Basic " + btoa(userId + ":" + apiKey),
-        "Content-Type": "application/json",
+      data: {
+        signLowerCase: signLowerCase,
       },
-      data: JSON.stringify(data),
     }).then((res) => {
       console.log(res);
 

@@ -167,4 +167,29 @@ module.exports = function (app) {
   app.get("/api/profilepic", async (req, res) => {
     await res.json({ image: req.user.image });
   });
+
+  app.post("/horoscope", async (req, res) => {
+    var userId = process.env.API_USER_ID;
+    var apiKey = process.env.API_KEY;
+
+    console.log(userId);
+    console.log(apiKey);
+    console.log(req.signLowerCase);
+
+    var api = `sun_sign_prediction/daily/${req.signLowerCase}`;
+    var data = "JSON Request Data";
+
+    $.ajax({
+      url: "https://json.astrologyapi.com/v1/" + api,
+      method: "POST",
+      dataType: "json",
+      headers: {
+        authorization: "Basic " + btoa(userId + ":" + apiKey),
+        "Content-Type": "application/json",
+      },
+      data: JSON.stringify(data),
+    }).then((api_res) => {
+      res.json(api_res);
+    });
+  });
 };
