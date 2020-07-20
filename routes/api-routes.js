@@ -171,26 +171,60 @@ module.exports = function (app) {
   });
 
   app.post("/horoscope", async (req, res) => {
-    var userId = process.env.API_USER_ID;
-    var apiKey = process.env.API_KEY;
+    let userId = process.env.API_USER_ID;
+    let apiKey = process.env.API_KEY;
+    let api = "planets";
+    let data = {
+      day: 12,
+      month: 3,
+      year: 1992,
+      hour: 2,
+      min: 23,
+      lat: 19.132,
+      lon: 72.342,
+      tzone: 5.5,
+    };
 
     console.log(userId);
     console.log(apiKey);
     console.log(req.body.signLowerCase);
 
-    var api = `sun_sign_prediction/daily/${req.body.signLowerCase}`;
-    var data = "JSON Request Data";
+    console.log(btoa(userId + ":" + apiKey));
+
+    console.log(JSON.stringify(data));
+
+    let dataString = JSON.stringify(data);
 
     axios
-      .post("https://json.astrologyapi.com/v1/" + api, {
+      .post("https://json.astrologyapi.com/v1/" + api, dataString, {
         headers: {
-          authorization: "Basic " + btoa(userId + ":" + apiKey),
+          authorization:
+            "Basic NjEzNTc2OmU3NjQ3NDM2ZTg0ZDkyODk4OWE2ZmU0YTU0YzI4M2Ew",
           "Content-Type": "application/json",
         },
-        data: JSON.stringify(data),
       })
       .then((api_res) => {
-        res.json(api_res);
+        console.log(api_res);
+        res.json(api_res.data);
+      })
+      .catch((err) => {
+        console.log(err);
       });
+
+    //   axios
+    //     .post("https://json.astrologyapi.com/v1/" + api, {
+    //       headers: {
+    //         authorization:
+    //           "Basic NjEzNTc2OmU3NjQ3NDM2ZTg0ZDkyODk4OWE2ZmU0YTU0YzI4M2Ew",
+    //         "Content-Type": "application/json",
+    //       },
+    //     })
+    //     .then((api_res) => {
+    //       console.log(api_res);
+    //       res.json(api_res);
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //     });
   });
 };
