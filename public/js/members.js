@@ -1,5 +1,3 @@
-require("dotenv").config();
-
 $(document).ready(function () {
   // mobile responive nav for materialize
   $(".sidenav").sidenav();
