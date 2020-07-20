@@ -51,7 +51,7 @@ $(document).ready(function () {
     // API call
     $.ajax({
       type: "GET",
-      url: `https://sandipbgt.com/theastrologer/api/horoscope/${signLowerCase}/today`,
+      url: `sandipbgt.com/theastrologer/api/horoscope/${signLowerCase}/today`,
       dataType: "json",
     }).then((res) => {
       console.log(res);
