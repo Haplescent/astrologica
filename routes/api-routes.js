@@ -173,11 +173,15 @@ module.exports = function (app) {
   app.post("/horoscope", async (req, res) => {
     let userId = process.env.API_USER_ID;
     let apiKey = process.env.API_KEY;
-    let api = "planets";
+    let api = "kalsarpa_details";
+    console.log(req.body.bdayMonth);
+    console.log(req.body.bdayDay);
+    console.log(req.body.bdayYear);
+
     let data = {
-      day: 12,
-      month: 3,
-      year: 1992,
+      day: parseInt(req.body.bdayDay),
+      month: parseInt(req.body.bdayMonth),
+      year: parseInt(req.body.bdayYear) + 10,
       hour: 2,
       min: 23,
       lat: 19.132,

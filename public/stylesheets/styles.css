@@ -160,7 +160,7 @@ form.login {
   backface-visibility: hidden;
   transform-style: preserve-3d;
   border-radius: 10px;
-  overflow: hidden;
+  overflow: scroll;
   opacity: 0.8;
   transform: rotateY(180deg);
   align-items: center;

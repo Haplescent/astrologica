@@ -18,9 +18,11 @@ $(document).ready(function () {
     const birthdayFormatted = moment(birthday).add(1, "days");
     const bdayMonth = moment(birthdayFormatted).format("MM");
     const bdayDay = moment(birthdayFormatted).format("DD");
+    const bdayYear = moment(birthdayFormatted).format("YYYY");
 
     console.log(bdayMonth);
     console.log(bdayDay);
+    console.log(bdayYear);
 
     // zodiac function
     function zodiac(day, month) {
@@ -55,14 +57,15 @@ $(document).ready(function () {
       method: "POST",
       dataType: "json",
       data: {
-        signLowerCase: signLowerCase,
+        bdayMonth: parseInt(bdayMonth),
+        bdayDay: parseInt(bdayDay),
+        bdayYear: parseInt(bdayYear),
       },
     }).then((res) => {
       console.log(res);
 
-      const horoscope = res.personal_life;
-      const horoscopeEdit = horoscope.slice(0, -59);
-
+      const horoscope = res.report.report;
+      const horoscopeEdit = horoscope;
       $("#horoscope").append(`
               <div class="card">
                 <div class="front-card">
