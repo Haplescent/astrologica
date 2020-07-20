@@ -63,9 +63,13 @@ $(document).ready(function () {
       },
     }).then((res) => {
       console.log(res);
+      console.log(res.report);
+      let horoscope = res.asc_report;
+      console.log(horoscope.ascendant);
+      console.log(horoscope.report);
 
-      const horoscope = res.report.report;
-      const horoscopeEdit = horoscope;
+      // ascendant;
+      // report;
       $("#horoscope").append(`
               <div class="card">
                 <div class="front-card">
@@ -77,8 +81,10 @@ $(document).ready(function () {
                   </div>
                 </div>
                 <div class="back-card white-text">
-                <h5>Today's Horoscope</h5>
-                  <p id="horoscopeParagraph">${horoscopeEdit}</p>
+                <h5>Ascendant Horoscope</h5>
+                <p>The ascendant is the astrological sign that is ascending on the eastern horizon at the specific time and location of an event.</p>
+                <p>While your sun sign is ${sign}, your ascendant sign is ${horoscope.ascendant}</p>
+                <p>${horoscope.report}</p>
                 </div>
               </div>
             `);
