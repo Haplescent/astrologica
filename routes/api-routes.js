@@ -181,7 +181,7 @@ module.exports = function (app) {
     let data = {
       day: parseInt(req.body.bdayDay),
       month: parseInt(req.body.bdayMonth),
-      year: parseInt(req.body.bdayYear) + 10,
+      year: 1985,
       hour: 2,
       min: 23,
       lat: 19.132,
