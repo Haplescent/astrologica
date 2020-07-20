@@ -5,6 +5,7 @@ const path = require("path");
 const multer = require("multer");
 const ejs = require("ejs");
 const btoa = require("btoa");
+const axios = require("axios");
 
 module.exports = function (app) {
   // Using the passport.authenticate middleware with our local strategy.
@@ -175,22 +176,21 @@ module.exports = function (app) {
 
     console.log(userId);
     console.log(apiKey);
-    console.log(req.signLowerCase);
+    console.log(req.body.signLowerCase);
 
-    var api = `sun_sign_prediction/daily/${req.signLowerCase}`;
+    var api = `sun_sign_prediction/daily/${req.body.signLowerCase}`;
     var data = "JSON Request Data";
 
-    $.ajax({
-      url: "https://json.astrologyapi.com/v1/" + api,
-      method: "POST",
-      dataType: "json",
-      headers: {
-        authorization: "Basic " + btoa(userId + ":" + apiKey),
-        "Content-Type": "application/json",
-      },
-      data: JSON.stringify(data),
-    }).then((api_res) => {
-      res.json(api_res);
-    });
+    axios
+      .post("https://json.astrologyapi.com/v1/" + api, {
+        headers: {
+          authorization: "Basic " + btoa(userId + ":" + apiKey),
+          "Content-Type": "application/json",
+        },
+        data: JSON.stringify(data),
+      })
+      .then((api_res) => {
+        res.json(api_res);
+      });
   });
 };
