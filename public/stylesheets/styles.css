@@ -13,10 +13,6 @@ main {
   flex: 1 0 auto;
 }
 
-#horoscope {
-  flex: 1 0 auto;
-}
-
 nav {
   background: #171528;
   height: 10vh;
