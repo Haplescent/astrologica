@@ -4,6 +4,7 @@ var passport = require("../config/passport");
 const path = require("path");
 const multer = require("multer");
 const ejs = require("ejs");
+const btoa = require("btoa");
 
 module.exports = function (app) {
   // Using the passport.authenticate middleware with our local strategy.
