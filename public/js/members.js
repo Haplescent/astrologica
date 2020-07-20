@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 $(document).ready(function () {
   // mobile responive nav for materialize
   $(".sidenav").sidenav();
@@ -49,10 +51,19 @@ $(document).ready(function () {
     console.log(signLowerCase);
 
     // API call
+
+    var userId = process.env.API_USER_ID;
+    var apiKey = process.env.API_KEY;
+    var data = "JSON Request Data";
     $.ajax({
-      type: "POST",
-      url: `https://json.astrologyapi.com/v1/sun_sign_prediction/daily/${signLowerCase}`,
+      url: "https://json.astrologyapi.com/v1/" + api,
+      method: "POST",
       dataType: "json",
+      headers: {
+        authorization: "Basic " + btoa(userId + ":" + apiKey),
+        "Content-Type": "application/json",
+      },
+      data: JSON.stringify(data),
     }).then((res) => {
       console.log(res);
 
