@@ -50,13 +50,13 @@ $(document).ready(function () {
 
     // API call
     $.ajax({
-      type: "GET",
-      url: `www.sandipbgt.com/theastrologer/api/horoscope/${signLowerCase}/today`,
+      type: "POST",
+      url: `https://json.astrologyapi.com/v1/sun_sign_prediction/daily/${signLowerCase}`,
       dataType: "json",
     }).then((res) => {
       console.log(res);
 
-      const horoscope = res.horoscope;
+      const horoscope = res.personal_life;
       const horoscopeEdit = horoscope.slice(0, -59);
 
       $("#horoscope").append(`
