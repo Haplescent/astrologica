@@ -202,8 +202,7 @@ module.exports = function (app) {
     axios
       .post("https://json.astrologyapi.com/v1/" + api, dataString, {
         headers: {
-          authorization:
-            "Basic NjEzNTc2OmU3NjQ3NDM2ZTg0ZDkyODk4OWE2ZmU0YTU0YzI4M2Ew",
+          authorization: "Basic " + btoa(userId + ":" + apiKey),
           "Content-Type": "application/json",
         },
       })
@@ -214,21 +213,5 @@ module.exports = function (app) {
       .catch((err) => {
         console.log(err);
       });
-
-    //   axios
-    //     .post("https://json.astrologyapi.com/v1/" + api, {
-    //       headers: {
-    //         authorization:
-    //           "Basic NjEzNTc2OmU3NjQ3NDM2ZTg0ZDkyODk4OWE2ZmU0YTU0YzI4M2Ew",
-    //         "Content-Type": "application/json",
-    //       },
-    //     })
-    //     .then((api_res) => {
-    //       console.log(api_res);
-    //       res.json(api_res);
-    //     })
-    //     .catch((err) => {
-    //       console.log(err);
-    //     });
   });
 };
