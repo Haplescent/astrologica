@@ -4,7 +4,7 @@ var passport = require("../config/passport");
 const path = require("path");
 const multer = require("multer");
 const ejs = require("ejs");
-const btoa = require("btoa");
+
 const axios = require("axios");
 
 module.exports = function (app) {
@@ -170,48 +170,23 @@ module.exports = function (app) {
     await res.json({ image: req.user.image });
   });
 
-  app.post("/horoscope", async (req, res) => {
-    let userId = process.env.API_USER_ID;
-    let apiKey = process.env.API_KEY;
-    let api = "general_ascendant_report";
-    console.log(req.body.bdayMonth);
-    console.log(req.body.bdayDay);
-    console.log(req.body.bdayYear);
+  app.get("/horoscope", async (req, res) => {
 
-    let data = {
-      day: parseInt(req.body.bdayDay),
-      month: parseInt(req.body.bdayMonth),
-      year: parseInt(req.body.bdayYear),
-      hour: 2,
-      min: 23,
-      lat: 19.132,
-      lon: 72.342,
-      tzone: 5.5,
+
+
+    var config = {
+      method: 'get',
+      url: `https://ohmanda.com/api/horoscope/${req.query.sign}/`,
+      headers: { }
     };
+    
+    axios(config)
+    .then(function (response) {
 
-    console.log(userId);
-    console.log(apiKey);
-    console.log(req.body.signLowerCase);
-
-    console.log(btoa(userId + ":" + apiKey));
-
-    console.log(JSON.stringify(data));
-
-    let dataString = JSON.stringify(data);
-
-    axios
-      .post("https://json.astrologyapi.com/v1/" + api, dataString, {
-        headers: {
-          authorization: "Basic " + btoa(userId + ":" + apiKey),
-          "Content-Type": "application/json",
-        },
-      })
-      .then((api_res) => {
-        console.log(api_res);
-        res.json(api_res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      res.json(response.data)
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
   });
 };

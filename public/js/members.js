@@ -12,7 +12,7 @@ $(document).ready(function () {
     );
 
     // formatting birthday
-    console.log(data.birthday);
+
 
     const birthday = data.birthday;
     const birthdayFormatted = moment(birthday).add(1, "days");
@@ -20,9 +20,9 @@ $(document).ready(function () {
     const bdayDay = moment(birthdayFormatted).format("DD");
     const bdayYear = moment(birthdayFormatted).format("YYYY");
 
-    console.log(bdayMonth);
-    console.log(bdayDay);
-    console.log(bdayYear);
+    // console.log(bdayMonth);
+    // console.log(bdayDay);
+    // console.log(bdayYear);
 
     // zodiac function
     function zodiac(day, month) {
@@ -48,26 +48,21 @@ $(document).ready(function () {
     const sign = zodiac(parseInt(bdayDay), parseInt(bdayMonth));
     const signLowerCase = sign.toLowerCase();
 
-    console.log(signLowerCase);
+    // console.log(signLowerCase);
 
     // API call
 
     $.ajax({
       url: "/horoscope",
-      method: "POST",
+      method: "GET",
       dataType: "json",
       data: {
-        bdayMonth: parseInt(bdayMonth),
-        bdayDay: parseInt(bdayDay),
-        bdayYear: parseInt(bdayYear),
+        sign: signLowerCase
       },
     }).then((res) => {
-      console.log(res);
-      console.log(res.report);
-      let horoscope = res.asc_report;
-      console.log(horoscope.ascendant);
-      console.log(horoscope.report);
 
+      jsonString = JSON.stringify(res);
+      jsonObject = JSON.parse(jsonString);
       // ascendant;
       // report;
       $("#horoscope").append(`
@@ -81,21 +76,19 @@ $(document).ready(function () {
                   </div>
                 </div>
                 <div class="back-card white-text">
-                <h5>Ascendant Horoscope</h5>
-                <p>The ascendant is the astrological sign that is ascending on the eastern horizon at the specific time and location of an event.</p>
-                <p>While your sun sign is ${sign}, your ascendant sign is ${horoscope.ascendant}</p>
-                <p>${horoscope.report}</p>
+                <h5>Daily Horoscope</h5>
+                <p>${jsonObject.horoscope}</p>
                 </div>
               </div>
             `);
     });
 
-    console.log(name);
+
   });
 
   $.get(`/api/profilepic`).then((res) => {
-    console.log(res);
-    console.log(res.image);
+    // console.log(res);
+    // console.log(res.image);
 
     if (res.image) {
       $("#dashboardprofile").append(`
